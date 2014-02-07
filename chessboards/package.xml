@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package>
+  <name>chessboards</name>
+  <version>0.0.1</version>
+  <description>The chessboards metapackage contains packages to detect chessboards, publish the transformation to the board from the camera, and publish visualisation of the board.</description>
+
+  <maintainer email="cburbridge@gmail.com">chris</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+
+  <export>
+	<metapackage/> 
+  </export>
+</package>
