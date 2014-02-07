@@ -109,9 +109,9 @@ add_executable(publisher src/publisher.cpp)
 # add_dependencies(chessboard_publisher_node chessboard_publisher_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(chessboard_publisher_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(publisher
+   ${catkin_LIBRARIES}
+ )
 
 #############
 ## Install ##
