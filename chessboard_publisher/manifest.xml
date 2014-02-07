@@ -1,0 +1,16 @@
+<package>
+  <description brief="chessboard_publisher">
+
+     chessboard_publisher
+
+  </description>
+  <author>Chris Burbridge</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/chessboard_publisher</url>
+  <depend package="roscpp"/>
+  <depend package="visualization_msgs"/>
+
+</package>
+
+
