@@ -8,7 +8,6 @@ find_package(catkin REQUIRED COMPONENTS
   cv_bridge
   geometry_msgs
   image_transport
-  opencv2
   roscpp
   sensor_msgs
   tf
@@ -16,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 ## System dependencies are found with CMake's conventions
+find_package(OpenCV REQUIRED)
 # find_package(Boost REQUIRED COMPONENTS system)
 
 
@@ -87,7 +87,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES chessboard_pose
-#  CATKIN_DEPENDS cv_bridge geometry_msgs image_transport opencv2 roscpp sensor_msgs tf visualization_msgs
+#  CATKIN_DEPENDS cv_bridge geometry_msgs image_transport opencv roscpp sensor_msgs tf visualization_msgs
 #  DEPENDS system_lib
 )
 
@@ -100,6 +100,7 @@ catkin_package(
 # include_directories(include)
 include_directories(
   ${catkin_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 ## Declare a cpp library
@@ -115,9 +116,10 @@ add_executable(chessboard_pose src/board_detector.cpp)
 # add_dependencies(chessboard_pose_node chessboard_pose_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(chessboard_pose_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(chessboard_pose
+   ${catkin_LIBRARIES}
+   ${OpenCV_LIBS}
+ )
 
 #############
 ## Install ##
