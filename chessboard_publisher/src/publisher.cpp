@@ -43,7 +43,7 @@ public:
 
 
 
-		float c=1;
+		float c=0;
 		for (int x=0;x <squares_width; x++) {
 			float cc=c;
 			for (int y=0;y<squares_height; y++) {
