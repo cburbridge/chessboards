@@ -89,11 +89,12 @@ public:
 			ROS_ERROR("Param: grid x size must be greater than 2");
 			return;
 		}
-
+		
 		if (!_node_private.getParam("grid_y_size", dimy)) {
 			ROS_ERROR("Missing parameter: grid_y_size");
 			return;
 		}
+
 		if (dimy < 3) {
 			ROS_ERROR("Param: grid y size must be greater than 2");
 			return;
@@ -131,8 +132,10 @@ public:
 		this->camInfoSubscriber = _node_pub.subscribe("camera_info", 1,
 				&ChessBoardDetector::cameraInfoCallback, this);
 		image_transport::ImageTransport it(_node_pub);
-		this->imageSubscriber = it.subscribe("image_rect", 1,
+		ROS_INFO("Subscribing to image stream");
+		this->imageSubscriber = it.subscribe("image_mono", 1,
 				&ChessBoardDetector::imageCallback, this);
+		ROS_INFO("Ok");
 
 
 
@@ -278,6 +281,7 @@ public:
 
 		cv::solvePnP(board_points, image_points, cv::Mat(this->intrinsic_matrix), distortion, R, T);
 
+
 		pose.position.x=T(0);
 		pose.position.y=T(1);
 		pose.position.z=T(2);
@@ -285,8 +289,11 @@ public:
 
 		// Quaternion from angle-axis
 		float angle;
-		angle=-sqrt(R(0)*R(0) + R(1)*R(1) + R(2)*R(2))/2.0;
-		R/=sqrt(R(0)*R(0) + R(1)*R(1) + R(2)*R(2));
+		//angle=-sqrt(R(0)*R(0) + R(1)*R(1) + R(2)*R(2))/2.0;
+		//R/=sqrt(R(0)*R(0) + R(1)*R(1) + R(2)*R(2));
+		angle=sqrt(R(0)*R(0) + R(1)*R(1) + R(2)*R(2));
+		R/=angle;//sqrt(R(0)*R(0) + R(1)*R(1) + R(2)*R(2));
+		angle/=2.0;
 		pose.orientation.w=cos( angle);
 		pose.orientation.x=sin(angle)*R(0);
 		pose.orientation.y=sin(angle)*R(1);
